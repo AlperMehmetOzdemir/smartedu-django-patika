@@ -1,5 +1,7 @@
 from django.db import models
 
+from teachers.models import Teacher
+
 class Category(models.Model):
   name = models.CharField(max_length=100, null=True)
   slug = models.SlugField(max_length=100, unique=True, null=True)
@@ -15,6 +17,7 @@ class Tag(models.Model):
     return self.name
 
 class Course(models.Model):
+  teacher = models.ForeignKey(Teacher, null=True, on_delete=models.CASCADE)
   name = models.CharField(max_length=100, unique=True)
   category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
   tags = models.ManyToManyField(Tag, blank=True, null=True)

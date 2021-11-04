@@ -20,7 +20,7 @@ class Course(models.Model):
   teacher = models.ForeignKey(Teacher, null=True, on_delete=models.CASCADE)
   name = models.CharField(max_length=100, unique=True)
   category = models.ForeignKey(Category, null=True, on_delete=models.DO_NOTHING)
-  tags = models.ManyToManyField(Tag, blank=True, null=True)
+  tags = models.ManyToManyField(Tag, blank=True)
   description = models.TextField(blank=True, null=True)
   image = models.ImageField(upload_to="courses/%Y/%m/%d")
   date = models.DateTimeField(auto_now=True)

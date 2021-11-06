@@ -69,3 +69,13 @@ def enroll_the_course(request):
   course.students.add(user)
   
   return redirect("dashboard")
+
+@login_required(login_url="login")
+def release_the_course(request):
+  course_id = request.POST["course_id"]
+  user_id = request.POST["user_id"]
+  course = Course.objects.get(id = course_id)
+  user = User.objects.get(id= user_id);
+  course.students.remove(user)
+  
+  return redirect("dashboard")

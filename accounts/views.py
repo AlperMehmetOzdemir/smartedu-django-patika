@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from accounts.forms import LoginForm, RegisterForm
@@ -45,5 +46,7 @@ def user_logout(request):
   logout(request)
   return redirect("index")
 
+@login_required(login_url="login")
 def user_dashboard(request):
-  pass
+  current_user = request.user
+  return render(request, "dashboard.html", current_user)
